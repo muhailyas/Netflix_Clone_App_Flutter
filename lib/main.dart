@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/core/color/colors.dart';
+import 'package:netflix_clone_app/core/constanst/text_theme.dart';
+import 'package:netflix_clone_app/presentation/main_page/main_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const NetflixClone());
@@ -9,14 +13,14 @@ class NetflixClone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+          primaryColor: Colors.blue,
+          scaffoldBackgroundColor: backgroundColor,
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+          textTheme: textTheme),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-            child: Center(
-          child: Text("Planning to create netflix clone"),
-        )),
-      ),
+      home: MainPage(),
     );
   }
 }
