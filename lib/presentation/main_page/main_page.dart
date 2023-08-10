@@ -11,8 +11,8 @@ class MainPage extends StatelessWidget {
   final List pages = [
     const ScreenHome(),
     const ScreenNewAndHot(),
-    const ScreenFastLaugh(),
-     ScreenSearch(),
+    ScreenFastLaugh(),
+    ScreenSearch(),
     ScreenDownloads()
   ];
   @override
