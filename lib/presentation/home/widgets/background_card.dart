@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_clone_app/core/constanst/constants.dart';
-
 import '../../../core/color/colors.dart';
 import 'custom_button.dart';
 
@@ -16,11 +14,13 @@ class BackgroundCard extends StatelessWidget {
           width: double.infinity,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(images), fit: BoxFit.cover)),
+                  image: NetworkImage(
+                      "https://hips.hearstapps.com/hmg-prod/images/best-movies-on-netflix-the-mother-6478b59716093.jpg?crop=1xw:1xh;center,top&resize=980:*"),
+                  fit: BoxFit.cover)),
         ),
         Positioned(
           bottom: 0,
-          left: 0,
+          left: -10,
           right: 0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

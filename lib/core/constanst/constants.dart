@@ -12,10 +12,6 @@ final kRadius10 = BorderRadius.circular(10);
 final kRadius20 = BorderRadius.circular(20);
 
 // images
-
-const images =
-    "https://image.tmdb.org/t/p/w1280/pmAv14TPE2vKMIRrVeCd1Ll7K94.jpg";
-
 // text styles
 
 TextStyle homeTitleTextStyle =
