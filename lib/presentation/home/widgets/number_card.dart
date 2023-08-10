@@ -34,7 +34,7 @@ class MainNumberCardHome extends StatelessWidget {
             ],
           ),
           Positioned(
-            left: -7,
+            left: -2.7,
             bottom: -20,
             child: BorderedText(
               strokeWidth: 5.0,

@@ -15,6 +15,7 @@ class NetflixClone extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
           primaryColor: Colors.blue,
           scaffoldBackgroundColor: backgroundColor,
           fontFamily: GoogleFonts.montserrat().fontFamily,
