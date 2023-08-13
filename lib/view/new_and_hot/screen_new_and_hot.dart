@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/color/colors.dart';
-import 'package:netflix_clone_app/presentation/new_and_hot/widgets/coming_soon_widget.dart';
-import 'package:netflix_clone_app/presentation/new_and_hot/widgets/everyones_watching_widget.dart';
+import 'package:netflix_clone_app/view/new_and_hot/widgets/coming_soon_widget.dart';
+import 'package:netflix_clone_app/view/new_and_hot/widgets/everyones_watching_widget.dart';
 import '../../core/constanst/constants.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
@@ -63,7 +63,7 @@ class ScreenNewAndHot extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildComingSoon(context),
+            _buildComingSoon(),
             _buildEveryonesWatching(),
           ],
         ),
@@ -71,17 +71,35 @@ class ScreenNewAndHot extends StatelessWidget {
     );
   }
 
-  Widget _buildComingSoon(BuildContext context) {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => const ComingSoonWidget(),
-    );
+  Widget _buildComingSoon() {
+    return ValueListenableBuilder(
+        valueListenable: upComingListNotifeir,
+        builder: (context, value, _) {
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              var data = value[index];
+              return ComingSoonWidget(
+                movie: data,
+              );
+            },
+          );
+        });
   }
 
   Widget _buildEveryonesWatching() {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => const EveryonesWatchingWidget(),
-    );
+    return ValueListenableBuilder(
+        valueListenable: topRatedListNotifeir,
+        builder: (context, value, _) {
+          return ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              var data = value[index];
+              return EveryonesWatchingWidget(
+                movie: data,
+              );
+            },
+          );
+        });
   }
 }

@@ -1,22 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../presentation/fast_laugh/widgets/video_list_item.dart';
+import 'package:netflix_clone_app/core/constanst/constants.dart';
+import '../view/fast_laugh/widgets/video_list_item.dart';
 
 class VideoWidget extends StatelessWidget {
-  const VideoWidget({
-    super.key,
-  });
+  const VideoWidget({super.key, required this.image});
+  final String image;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 230,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage(
-                  "https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/hPcP1kv6vrkRmQO3YgV1H97FE5Q.jpg"),
-              fit: BoxFit.cover)),
+              image: NetworkImage("$imagePath$image"), fit: BoxFit.cover)),
       child: Stack(
         children: [
           Positioned(

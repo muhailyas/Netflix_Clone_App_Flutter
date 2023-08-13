@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:netflix_clone_app/controller/api/api.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
-import 'package:netflix_clone_app/presentation/home/widgets/background_card.dart';
-import 'package:netflix_clone_app/presentation/home/widgets/number_title_card.dart';
+import 'package:netflix_clone_app/view/home/widgets/background_card.dart';
+import 'package:netflix_clone_app/view/home/widgets/number_title_card.dart';
 import '../../widgets/main_title_card.dart';
 
 ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
+  fetchDatas() async {
+    trendingNowListNotifeir.value = await Api().getTrendingMovies();
+    topRatedListNotifeir.value = await Api().getTopRated();
+    upComingListNotifeir.value = await Api().getUpComing();
+    top10TvShowsInIndiaTodayListNotifeir.value =
+        await Api().getTop10TvShowsInIndiaToday();
+  }
 
   @override
   Widget build(BuildContext context) {
+    fetchDatas();
     return Scaffold(
       body: ValueListenableBuilder(
           valueListenable: scrollNotifier,
@@ -28,15 +37,23 @@ class ScreenHome extends StatelessWidget {
               },
               child: Stack(
                 children: [
-                    ListView(
-                    children: const [
-                      BackgroundCard(),
+                  ListView(
+                    children: [
+                      const BackgroundCard(),
                       kHeight10,
-                      MainTitleCard(title: "Released in the past year"),
-                      MainTitleCard(title: "Trending now"),
-                      NumberTitleCard(),
-                      MainTitleCard(title: "Tense Dramas"),
-                      MainTitleCard(title: "South Indian Cinema"),
+                      MainTitleCard(
+                        title: "Top Rated",
+                        listNotifier: topRatedListNotifeir,
+                      ),
+                      MainTitleCard(
+                        title: "Trending now",
+                        listNotifier: trendingNowListNotifeir,
+                      ),
+                      const NumberTitleCard(),
+                      MainTitleCard(
+                        title: "Upcoming",
+                        listNotifier: upComingListNotifeir,
+                      )
                     ],
                   ),
                   scrollNotifier.value

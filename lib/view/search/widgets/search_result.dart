@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
-import 'package:netflix_clone_app/presentation/search/widgets/search_idle.dart';
+import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
 import 'main_card.dart';
 
 class SearchResult extends StatelessWidget {

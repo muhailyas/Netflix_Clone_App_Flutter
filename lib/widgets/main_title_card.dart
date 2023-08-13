@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/widgets/main_card.dart';
+import '../models/movie.dart';
 import 'main_title.widget.dart';
 
 class MainTitleCard extends StatelessWidget {
-  const MainTitleCard({super.key, required this.title});
+  const MainTitleCard(
+      {super.key, required this.title, required this.listNotifier});
   final String title;
+  final ValueNotifier<List<Movie>> listNotifier;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +19,20 @@ class MainTitleCard extends StatelessWidget {
         kHeight10,
         LimitedBox(
             maxHeight: 250,
-            child: ListView.builder(
-              itemCount: 10,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => const MainCardHome(),
-            ))
+            child: ValueListenableBuilder(
+                valueListenable: listNotifier,
+                builder: (context, value, _) {
+                  return ListView.builder(
+                    itemCount: value.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      var data = value[index];
+                      return MainCardHome(
+                        movie: data,
+                      );
+                    },
+                  );
+                }))
       ],
     );
   }

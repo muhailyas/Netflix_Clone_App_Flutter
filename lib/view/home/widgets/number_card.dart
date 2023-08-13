@@ -1,13 +1,13 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/models/movie.dart';
 import '../../../core/constanst/constants.dart';
 
 class MainNumberCardHome extends StatelessWidget {
-  const MainNumberCardHome({
-    super.key,
-    required this.index,
-  });
+  const MainNumberCardHome(
+      {super.key, required this.index, required this.movie});
   final int index;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,15 @@ class MainNumberCardHome extends StatelessWidget {
                 height: 250,
                 decoration: BoxDecoration(
                     borderRadius: kRadius10,
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            "https://hips.hearstapps.com/hmg-prod/images/best-movies-on-netflix-right-now-glass-onion-knives-out-6440550f29790.jpg?crop=1xw:1xh;center,top&resize=980:*"),
+                    image: DecorationImage(
+                        image: NetworkImage("$imagePath${movie.posterPath}"),
                         fit: BoxFit.cover)),
               ),
             ],
           ),
           Positioned(
-            left: -2.7,
-            bottom: -20,
+            left: -6,
+            bottom: -25,
             child: BorderedText(
               strokeWidth: 5.0,
               strokeJoin: StrokeJoin.miter,

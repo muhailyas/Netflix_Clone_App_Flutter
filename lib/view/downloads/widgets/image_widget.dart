@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/core/constanst/constants.dart';
 
 class DownloadPageImageWidget extends StatelessWidget {
   const DownloadPageImageWidget(
@@ -28,7 +29,8 @@ class DownloadPageImageWidget extends StatelessWidget {
             color: Colors.black,
             borderRadius: BorderRadius.circular(radius),
             image: DecorationImage(
-                image: NetworkImage(imageList), fit: BoxFit.cover)),
+                image: NetworkImage("$imagePath$imageList"),
+                fit: BoxFit.cover)),
       ),
     );
   }

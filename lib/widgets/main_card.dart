@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/models/movie.dart';
 import '../core/constanst/constants.dart';
 
 class MainCardHome extends StatelessWidget {
-  const MainCardHome({
-    super.key,
-  });
+  const MainCardHome({super.key, required this.movie});
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,8 @@ class MainCardHome extends StatelessWidget {
         height: 250,
         decoration: BoxDecoration(
             borderRadius: kRadius10,
-            image: const DecorationImage(
-                image: NetworkImage(
-                    "https://hips.hearstapps.com/hmg-prod/images/best-movies-on-netflix-right-now-glass-onion-knives-out-6440550f29790.jpg?crop=1xw:1xh;center,top&resize=980:*"),
+            image: DecorationImage(
+                image: NetworkImage("$imagePath${movie.posterPath}"),
                 fit: BoxFit.cover)),
       ),
     );

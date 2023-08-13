@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/color/colors.dart';
+import 'package:netflix_clone_app/core/constanst/constants.dart';
 
 ValueNotifier<bool> muteChangeNotifier = ValueNotifier(false);
 
 class VideoListItem extends StatelessWidget {
-  final int index;
   final String imageUrl;
-  const VideoListItem({super.key, required this.index, required this.imageUrl});
+  const VideoListItem({super.key,required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class VideoListItem extends StatelessWidget {
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+                image: NetworkImage("$imagePath$imageUrl"), fit: BoxFit.cover)),
       ),
       Positioned(
         bottom: 10,
@@ -41,20 +41,20 @@ class VideoListItem extends StatelessWidget {
                               : CupertinoIcons.volume_off));
                     }),
               ),
-              const Column(
+               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: CircleAvatar(
                       radius: 34,
                       backgroundImage: NetworkImage(
-                          "https://hips.hearstapps.com/hmg-prod/images/best-movies-on-netflix-right-now-glass-onion-knives-out-6440550f29790.jpg?crop=1xw:1xh;center,top&resize=980:*"),
+                          "$imagePath$imageUrl"),
                     ),
                   ),
-                  VideoActionsWidget(icon: Icons.emoji_emotions, title: "LOL"),
-                  VideoActionsWidget(icon: Icons.add, title: "My List"),
-                  VideoActionsWidget(icon: Icons.share, title: "Share"),
-                  VideoActionsWidget(icon: Icons.play_arrow, title: "Play"),
+                  const VideoActionsWidget(icon: Icons.emoji_emotions, title: "LOL"),
+                  const VideoActionsWidget(icon: Icons.add, title: "My List"),
+                  const VideoActionsWidget(icon: Icons.share, title: "Share"),
+                  const VideoActionsWidget(icon: Icons.play_arrow, title: "Play"),
                 ],
               )
             ]),
