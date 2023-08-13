@@ -54,11 +54,25 @@ class Api {
       throw Exception('Something went wrong');
     }
   }
+
   static const _top10TvShowsInIndiaToday =
       "https://api.themoviedb.org/3/discover/tv?api_key=$apiKey&with_original_language=hi&sort_by=popularity.desc";
 
   Future<List<Movie>> getTop10TvShowsInIndiaToday() async {
     final response = await http.get(Uri.parse(_top10TvShowsInIndiaToday));
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body)["results"] as List;
+      return responseData.map((movie) => Movie.fromJson(movie)).toList();
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
+
+  static const _forSearch =
+      "https://api.themoviedb.org/3/discover/movie?api_key=$apiKey";
+
+  Future<List<Movie>> forSearchDara() async {
+    final response = await http.get(Uri.parse(_forSearch));
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body)["results"] as List;
       return responseData.map((movie) => Movie.fromJson(movie)).toList();

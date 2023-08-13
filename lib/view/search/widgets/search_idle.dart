@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
+import 'package:netflix_clone_app/models/movie.dart';
 
 const imageUrl = "https://wallpaperaccess.com/full/1695677.jpg";
 
@@ -15,13 +16,21 @@ class SearchIdleWidget extends StatelessWidget {
         const SearchTextWidget(text: "Top Searches"),
         kHeight10,
         Expanded(
-          child: ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (context, index) => const TopSearchItemTile(
-                    imageUrl: imageUrl,
-                  ),
-              separatorBuilder: (context, index) => kHeight10,
-              itemCount: 10),
+          child: ValueListenableBuilder(
+              valueListenable: searchListNotifeir,
+              builder: (context, value, _) {
+                return ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      var data = value[index];
+                      return TopSearchItemTile(
+                        imageUrl: imageUrl,
+                        movie: data,
+                      );
+                    },
+                    separatorBuilder: (context, index) => kHeight10,
+                    itemCount: searchListNotifeir.value.length);
+              }),
         ),
       ],
     );
@@ -42,8 +51,10 @@ class SearchTextWidget extends StatelessWidget {
 }
 
 class TopSearchItemTile extends StatelessWidget {
-  const TopSearchItemTile({super.key, required this.imageUrl});
+  const TopSearchItemTile(
+      {super.key, required this.imageUrl, required this.movie});
   final String imageUrl;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +68,16 @@ class TopSearchItemTile extends StatelessWidget {
               height: 100,
               width: 170,
               child: Image.network(
-                imageUrl,
+                "$imagePath${movie.posterPath}",
                 fit: BoxFit.cover,
               ),
             ),
           ),
           kWidth10,
-          const Expanded(
+          Expanded(
             child: Text(
-              'Movie Name ',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              movie.title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           const Icon(

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/controller/service.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_result.dart';
+
+import '../../controller/api/api.dart';
 
 class ScreenSearch extends StatelessWidget {
   final searchController = TextEditingController();
@@ -18,8 +21,13 @@ class ScreenSearch extends StatelessWidget {
     }
   }
 
+  fetcDataForhSearch() async {
+    searchListNotifeir.value = await Api().forSearchDara();
+  }
+
   @override
   Widget build(BuildContext context) {
+    fetcDataForhSearch();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -74,6 +82,8 @@ class ScreenSearch extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
                 onChanged: (value) {
                   updateSearchResultVisibility();
+                  searchResultListNotifeir.value =
+                      searchResult(searchController.text);
                 },
               ),
             ),

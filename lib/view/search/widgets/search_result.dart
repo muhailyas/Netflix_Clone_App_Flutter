@@ -14,15 +14,25 @@ class SearchResult extends StatelessWidget {
         const SearchTextWidget(text: "Movies & TV"),
         kHeight10,
         Expanded(
-            child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 1 / 1.5),
-          itemBuilder: (context, index) => const MainCard(),
-          itemCount: 20,
-        )),
+            child: ValueListenableBuilder(
+                valueListenable: searchResultListNotifeir,
+                builder: (context, value, _) {
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 1 / 1.5),
+                    itemBuilder: (context, index) {
+                      var data = value[index];
+                      return MainCard(
+                        movie: data,
+                      );
+                    },
+                    itemCount: searchResultListNotifeir.value.length,
+                  );
+                })),
       ],
     );
   }

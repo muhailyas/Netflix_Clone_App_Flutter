@@ -23,7 +23,9 @@ class ComingSoonWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                monthFormatter.format(DateTime.parse(movie.releaseDate)),
+                monthFormatter
+                    .format(DateTime.parse(movie.releaseDate))
+                    .toUpperCase(),
                 style: const TextStyle(
                     fontSize: 18,
                     color: kGreyColor,
