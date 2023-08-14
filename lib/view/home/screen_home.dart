@@ -4,7 +4,7 @@ import 'package:netflix_clone_app/controller/api/api.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/view/home/widgets/background_card.dart';
 import 'package:netflix_clone_app/view/home/widgets/number_title_card.dart';
-import '../../widgets/main_title_card.dart';
+import '../widgets/main_title_card.dart';
 
 ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 

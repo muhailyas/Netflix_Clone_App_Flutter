@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/models/movie.dart';
 import '../../../core/color/colors.dart';
 import '../../../core/constanst/constants.dart';
-import '../../../widgets/video_widget.dart';
+import '../../widgets/video_widget.dart';
 import '../../home/widgets/custom_button.dart';
 
 class EveryonesWatchingWidget extends StatelessWidget {

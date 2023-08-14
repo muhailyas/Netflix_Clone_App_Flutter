@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
-import 'package:netflix_clone_app/widgets/main_card.dart';
-import '../models/movie.dart';
+import 'package:netflix_clone_app/view/widgets/main_card.dart';
+import '../../models/movie.dart';
 import 'main_title.widget.dart';
 
 class MainTitleCard extends StatelessWidget {

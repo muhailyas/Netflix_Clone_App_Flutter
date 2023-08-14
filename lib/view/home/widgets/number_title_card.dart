@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/constanst/constants.dart';
-import '../../../widgets/main_title.widget.dart';
+import '../../widgets/main_title.widget.dart';
 import 'number_card.dart';
 
 class NumberTitleCard extends StatelessWidget {

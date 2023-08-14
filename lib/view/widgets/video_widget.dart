@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
-import '../view/fast_laugh/widgets/video_list_item.dart';
+import '../fast_laugh/widgets/video_list_item.dart';
 
 class VideoWidget extends StatelessWidget {
   const VideoWidget({super.key, required this.image});

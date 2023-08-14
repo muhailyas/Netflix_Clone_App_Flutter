@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
-import 'package:netflix_clone_app/widgets/app_bar_widget.dart';
+import 'package:netflix_clone_app/view/widgets/app_bar_widget.dart';
 import 'widgets/smart_downloads.dart';
 import 'package:netflix_clone_app/view/downloads/widgets/section2.dart';
 import 'package:netflix_clone_app/view/downloads/widgets/section3.dart';

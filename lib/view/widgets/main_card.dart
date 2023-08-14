@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/models/movie.dart';
-import '../core/constanst/constants.dart';
+import '../../core/constanst/constants.dart';
 
 class MainCardHome extends StatelessWidget {
   const MainCardHome({super.key, required this.movie});
