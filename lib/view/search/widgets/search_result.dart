@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_clone_app/core/constanst/constants.dart';
+import 'package:netflix_clone_app/controller/api/api.dart';
+import 'package:netflix_clone_app/models/movie.dart';
+import 'package:netflix_clone_app/view/search/widgets/main_card.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
-import 'main_card.dart';
+import '../../../core/constanst/constants.dart';
 
 class SearchResult extends StatelessWidget {
-  const SearchResult({super.key});
+  const SearchResult({Key? key, required this.result}) : super(key: key);
+  final String result;
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +17,41 @@ class SearchResult extends StatelessWidget {
         const SearchTextWidget(text: "Movies & TV"),
         kHeight10,
         Expanded(
-            child: ValueListenableBuilder(
-                valueListenable: searchResultListNotifeir,
-                builder: (context, value, _) {
-                  return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1 / 1.5),
-                    itemBuilder: (context, index) {
-                      var data = value[index];
-                      return MainCard(
-                        movie: data,
-                      );
-                    },
-                    itemCount: searchResultListNotifeir.value.length,
-                  );
-                })),
+          child: FutureBuilder<List<Movie>>(
+            future: Api().searchResult(result),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Error loading data"),
+                );
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text("No data found"),
+                );
+              } else {
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 1 / 1.5,
+                  ),
+                  itemBuilder: (context, index) {
+                    var data = snapshot.data![index];
+                    return MainCard(
+                      movie: data,
+                    );
+                  },
+                  itemCount: snapshot.data!.length,
+                );
+              }
+            },
+          ),
+        ),
       ],
     );
   }

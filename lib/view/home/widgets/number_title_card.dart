@@ -19,7 +19,10 @@ class NumberTitleCard extends StatelessWidget {
                 valueListenable: top10TvShowsInIndiaTodayListNotifeir,
                 builder: (context, value, _) {
                   return ListView.builder(
-                      itemCount: 10,
+                      itemCount: top10TvShowsInIndiaTodayListNotifeir
+                              .value.isNotEmpty
+                          ? 10
+                          : top10TvShowsInIndiaTodayListNotifeir.value.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         var data = value[index];

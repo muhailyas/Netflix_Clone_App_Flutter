@@ -1,33 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix_clone_app/controller/service.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_result.dart';
 
-import '../../controller/api/api.dart';
+class ScreenSearch extends StatefulWidget {
+  const ScreenSearch({super.key});
 
-class ScreenSearch extends StatelessWidget {
+  @override
+  State<ScreenSearch> createState() => _ScreenSearchState();
+}
+
+class _ScreenSearchState extends State<ScreenSearch> {
+  bool changer = false;
   final searchController = TextEditingController();
+
   final ValueNotifier<bool> showSearchResult = ValueNotifier(false);
-
-  ScreenSearch({super.key});
-
-  void updateSearchResultVisibility() {
-    if (searchController.text.isNotEmpty) {
-      showSearchResult.value = true;
-    } else {
-      showSearchResult.value = false;
-    }
-  }
-
-  fetcDataForhSearch() async {
-    searchListNotifeir.value = await Api().forSearchDara();
-  }
 
   @override
   Widget build(BuildContext context) {
-    fetcDataForhSearch();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -57,7 +48,10 @@ class ScreenSearch extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         searchController.clear();
-                        updateSearchResultVisibility();
+                        setState(() {
+                          showSearchResult.value = false;
+                          changer = false;
+                        });
                       },
                       child: child,
                     );
@@ -80,23 +74,25 @@ class ScreenSearch extends StatelessWidget {
                   ),
                 ),
                 style: const TextStyle(color: Colors.white),
-                onChanged: (value) {
-                  updateSearchResultVisibility();
-                  searchResultListNotifeir.value =
-                      searchResult(searchController.text);
+                onChanged: (value) async {
+                  setState(() {
+                    changer = true;
+                    showSearchResult.value = true;
+                    if (searchController.text.isEmpty) {
+                      changer = false;
+                      showSearchResult.value = false;
+                    }
+                  });
                 },
               ),
             ),
             kHeight10,
             Expanded(
-              child: ValueListenableBuilder<bool>(
-                valueListenable: showSearchResult,
-                builder: (context, value, child) {
-                  return value
-                      ? const SearchResult()
-                      : const SearchIdleWidget();
-                },
-              ),
+              child: changer
+                  ? SearchResult(
+                      result: searchController.text,
+                    )
+                  : const SearchIdleWidget(),
             ),
           ],
         ),

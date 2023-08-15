@@ -10,7 +10,7 @@ void main() {
 
 class NetflixClone extends StatelessWidget {
   const NetflixClone({super.key});
-    
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

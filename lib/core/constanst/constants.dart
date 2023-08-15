@@ -29,5 +29,4 @@ ValueNotifier<List<Movie>> topRatedListNotifeir = ValueNotifier([]);
 ValueNotifier<List<Movie>> top10TvShowsInIndiaTodayListNotifeir =
     ValueNotifier([]);
 ValueNotifier<List<Movie>> upComingListNotifeir = ValueNotifier([]);
-ValueNotifier<List<Movie>> searchListNotifeir = ValueNotifier([]);
 ValueNotifier<List<Movie>> searchResultListNotifeir = ValueNotifier([]);

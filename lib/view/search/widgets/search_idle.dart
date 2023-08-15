@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/controller/api/api.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/models/movie.dart';
 
@@ -16,21 +17,29 @@ class SearchIdleWidget extends StatelessWidget {
         const SearchTextWidget(text: "Top Searches"),
         kHeight10,
         Expanded(
-          child: ValueListenableBuilder(
-              valueListenable: searchListNotifeir,
-              builder: (context, value, _) {
+          child: FutureBuilder(
+            future: Api().forSearchDara(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError ||
+                  snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
                 return ListView.separated(
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      var data = value[index];
+                      var data = snapshot.data![index];
                       return TopSearchItemTile(
                         imageUrl: imageUrl,
                         movie: data,
                       );
                     },
                     separatorBuilder: (context, index) => kHeight10,
-                    itemCount: searchListNotifeir.value.length);
-              }),
+                    itemCount: snapshot.data!.length);
+              }
+            },
+          ),
         ),
       ],
     );

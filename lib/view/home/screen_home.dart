@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:netflix_clone_app/controller/api/api.dart';
@@ -7,6 +8,7 @@ import 'package:netflix_clone_app/view/home/widgets/number_title_card.dart';
 import '../widgets/main_title_card.dart';
 
 ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
+int randomIndex = 0;
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -16,6 +18,8 @@ class ScreenHome extends StatelessWidget {
     upComingListNotifeir.value = await Api().getUpComing();
     top10TvShowsInIndiaTodayListNotifeir.value =
         await Api().getTop10TvShowsInIndiaToday();
+    final random = Random();
+    randomIndex = random.nextInt(10);
   }
 
   @override
@@ -39,7 +43,19 @@ class ScreenHome extends StatelessWidget {
                 children: [
                   ListView(
                     children: [
-                      const BackgroundCard(),
+                      FutureBuilder(
+                        future: Api().getTrendingMovies(),
+                        builder: (context, snapshot) => snapshot.hasData
+                            ? BackgroundCard(
+                                image: snapshot.data![randomIndex].posterPath)
+                            : const SizedBox(
+                                height: 700,
+                                width: double.infinity,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                      ),
                       kHeight10,
                       MainTitleCard(
                         title: "Top Rated",
