@@ -9,6 +9,7 @@ class Api {
       "https://api.themoviedb.org/3/trending/movie/day?api_key=$apiKey";
   Future<List<Movie>> getTrendingMovies() async {
     final response = await http.get(Uri.parse(_trendingUrl));
+
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body)["results"] as List;
       return responseData.map((movie) => Movie.fromJson(movie)).toList();

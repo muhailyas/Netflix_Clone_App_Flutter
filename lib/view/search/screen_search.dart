@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone_app/controller/debouncer.dart';
 import 'package:netflix_clone_app/core/constanst/constants.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
 import 'package:netflix_clone_app/view/search/widgets/search_result.dart';
@@ -14,7 +15,7 @@ class ScreenSearch extends StatefulWidget {
 class _ScreenSearchState extends State<ScreenSearch> {
   bool changer = false;
   final searchController = TextEditingController();
-
+  final _debonucer = Debouncer(delay: const Duration(milliseconds: 500));
   final ValueNotifier<bool> showSearchResult = ValueNotifier(false);
 
   @override
@@ -75,13 +76,15 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 ),
                 style: const TextStyle(color: Colors.white),
                 onChanged: (value) async {
-                  setState(() {
-                    changer = true;
-                    showSearchResult.value = true;
-                    if (searchController.text.isEmpty) {
-                      changer = false;
-                      showSearchResult.value = false;
-                    }
+                  _debonucer.call(() {
+                    setState(() {
+                      changer = true;
+                      showSearchResult.value = true;
+                      if (searchController.text.isEmpty) {
+                        changer = false;
+                        showSearchResult.value = false;
+                      }
+                    });
                   });
                 },
               ),

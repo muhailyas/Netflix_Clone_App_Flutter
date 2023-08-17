@@ -31,7 +31,6 @@ class SearchIdleWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var data = snapshot.data![index];
                       return TopSearchItemTile(
-                        imageUrl: imageUrl,
                         movie: data,
                       );
                     },
@@ -54,15 +53,16 @@ class SearchTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      style: const TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }
 
 class TopSearchItemTile extends StatelessWidget {
-  const TopSearchItemTile(
-      {super.key, required this.imageUrl, required this.movie});
-  final String imageUrl;
+  const TopSearchItemTile({super.key, required this.movie});
   final Movie movie;
 
   @override
@@ -77,7 +77,7 @@ class TopSearchItemTile extends StatelessWidget {
               height: 100,
               width: 170,
               child: Image.network(
-                "$imagePath${movie.posterPath}",
+                "$imagePath${movie.backDropPath}",
                 fit: BoxFit.cover,
               ),
             ),
