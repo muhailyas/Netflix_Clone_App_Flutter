@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone_app/controller/api/api.dart';
 import 'package:netflix_clone_app/models/movie.dart';
 import 'package:netflix_clone_app/view/search/widgets/main_card.dart';
-import 'package:netflix_clone_app/view/search/widgets/search_idle.dart';
 import '../../../core/constanst/constants.dart';
+import 'search_text_widget.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({Key? key, required this.result}) : super(key: key);

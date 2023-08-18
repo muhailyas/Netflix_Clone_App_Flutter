@@ -11,6 +11,7 @@ class ComingSoonWidget extends StatelessWidget {
   final Movie movie;
   final DateFormat monthFormatter = DateFormat('MMM');
   final DateFormat dayFormatter = DateFormat('dd');
+  final DateFormat dayFormatterDay = DateFormat('EEEE');
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -82,7 +83,8 @@ class ComingSoonWidget extends StatelessWidget {
                 ],
               ),
               kHeight10,
-              const Text("Coming On Friday"),
+              Text(
+                  "Coming On ${dayFormatterDay.format(DateTime.parse(movie.releaseDate))}"),
               kHeight10,
               Text(
                 movie.title,
